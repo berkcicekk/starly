@@ -47,55 +47,54 @@ export default function Dashboard() {
 
   if (!isConnected) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-800 to-fuchsia-700">
         <Header />
         <main className="container mx-auto px-4 py-8">
           <div className="flex flex-col items-center justify-center min-h-[calc(100vh-120px)] space-y-8">
             <div className="text-center space-y-4 max-w-2xl">
-              <h1 className="text-4xl font-bold tracking-tight">
-                Real World Asset Investment Platform
+              <h1 className="text-4xl font-bold tracking-tight text-white">
+              Earn Tokens by Completing Tasks on the Stellar Network!
               </h1>
-              <p className="text-xl text-muted-foreground">
-                Access tokenized real estate, commodities, and other physical assets 
-                through compliant blockchain technology on Stellar.
+              <p className="text-xl text-muted-foreground text-white">
+              Join our innovative platform where you can complete tasks on the Stellar blockchain and earn reward tokens. Explore available missions, participate, and boost your earnings!
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-3xl">
               <Card className="text-center">
-                <CardHeader>
-                  <Building2 className="h-12 w-12 mx-auto text-primary" />
-                  <CardTitle className="text-lg">Tokenized Assets</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    Invest in premium real estate and other assets through blockchain tokens
-                  </p>
-                </CardContent>
+              <CardHeader>
+                <Building2 className="h-12 w-12 mx-auto text-primary" />
+                <CardTitle className="text-lg">Earn by Completing Tasks</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                Complete missions on the Stellar blockchain and earn tokens, just like Galxe quests.
+                </p>
+              </CardContent>
               </Card>
               
               <Card className="text-center">
-                <CardHeader>
-                  <CheckCircle className="h-12 w-12 mx-auto text-green-600" />
-                  <CardTitle className="text-lg">Compliant</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    KYC verification and regulatory compliance built into every transaction
-                  </p>
-                </CardContent>
+              <CardHeader>
+                <CheckCircle className="h-12 w-12 mx-auto text-green-600" />
+                <CardTitle className="text-lg">Become a Verified User</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                Stake your earned tokens to unlock verified status and access exclusive features.
+                </p>
+              </CardContent>
               </Card>
               
               <Card className="text-center">
-                <CardHeader>
-                  <TrendingUp className="h-12 w-12 mx-auto text-blue-600" />
-                  <CardTitle className="text-lg">High Yield</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    Earn passive income through rental yields and asset appreciation
-                  </p>
-                </CardContent>
+              <CardHeader>
+                <TrendingUp className="h-12 w-12 mx-auto text-blue-600" />
+                <CardTitle className="text-lg">Earn More by Sharing</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                Share your achievements on Twitter and earn extra tokens for every post.
+                </p>
+              </CardContent>
               </Card>
             </div>
           </div>
