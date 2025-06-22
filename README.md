@@ -30,23 +30,37 @@ Starly’s goal is to make Web3 user engagement real, simple, and scalable. By c
 
 ## 🌟 Key Features
 
-- 🛠️ **Task creation & participation**  
-  Users can create tasks or join existing ones to contribute and earn rewards.
+## 🧠 Key Features
 
-- 🔁 **Stake & unstake tokens**  
-  Lock your tokens to participate and unlock them anytime with full transparency.
+### ✅ Task & Reward System
+- Manual task verification (off-chain)
+- Staked users access exclusive tasks
+- Rewards distributed via Soroban smart contract
 
-- 🎁 **Reward distribution logic**  
-  Automated and fair reward mechanisms tied to task completion and stake.
+### 🏠 RWA Tokenization (Optional Feature)
+- Custom metadata for each asset: `name`, `type`, `legal_doc_hash`, `valuation`
+- Compliance system (KYC, accreditation, jurisdiction)
+- Whitelist system for transfers
+- Controlled minting, burning, pausing
+- On-chain valuation updates
 
-- 🔐 **Wallet login (Freighter supported)**  
-  Secure login and transaction signing using your **Freighter Wallet**.
+### 🔐 Compliance & Security
+- Admin-only minting/burning
+- Compliance verification before transfers
+- Optional time-limited compliance expiration
+- Address whitelist enforcement
 
-- 📝 **Task list & details UI**  
-  Clean and intuitive interface to browse, join, and track tasks.
+---
 
-- 🚀 **On-chain testnet deployment**  
-  All core logic deployed and running on the **Stellar Soroban testnet**.
+## 💾 Contract State Structure
+
+- `ADMIN`: Owner address
+- `METADATA`: Asset info (`name`, `symbol`, `valuation`, etc.)
+- `COMPLIANCE`: Map of KYC-compliant addresses
+- `WHITELIST`: Vec of approved addresses
+- `BALANCES`: Map of user token holdings
+- `PAUSED`: Contract pause status
+- `SUPPLY`: Total token supply
 
 ---
 
