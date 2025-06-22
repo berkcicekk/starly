@@ -81,7 +81,7 @@ Starly’s goal is to make Web3 user engagement real, simple, and scalable. By c
 
 ### Deployment
 - Contract on Stellar **Testnet**.
-- ***Smart Contract Link***
+- [***Stellar Expert Link***](https://stellar.expert/explorer/testnet/contract/CB2ENWCZ7G4KWWV52XB4KCY5F3GVGBUU6XUDKCT2YCWIZRINF4HFZXRT)
 
 ---
 
