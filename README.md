@@ -28,6 +28,28 @@ Starly’s goal is to make Web3 user engagement real, simple, and scalable. By c
 
 ---
 
+## 🌟 Key Features
+
+- 🛠️ **Task creation & participation**  
+  Users can create tasks or join existing ones to contribute and earn rewards.
+
+- 🔁 **Stake & unstake tokens**  
+  Lock your tokens to participate and unlock them anytime with full transparency.
+
+- 🎁 **Reward distribution logic**  
+  Automated and fair reward mechanisms tied to task completion and stake.
+
+- 🔐 **Wallet login (Freighter supported)**  
+  Secure login and transaction signing using your **Freighter Wallet**.
+
+- 📝 **Task list & details UI**  
+  Clean and intuitive interface to browse, join, and track tasks.
+
+- 🚀 **On-chain testnet deployment**  
+  All core logic deployed and running on the **Stellar Soroban testnet**.
+
+---
+
 ## 🧠 Software Development Plan
 
 ### Frontend (React + Freighter Wallet Integration)
