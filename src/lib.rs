@@ -1,8 +1,7 @@
 #![no_std]
 
 use soroban_sdk::{
-    contract, contractimpl, contracttype, symbol_short,
-    Address, Env, String, Symbol, Vec, Map
+    contract, contractimpl, contracttype, symbol_short, Address, Env, Map, String, Symbol, Vec,
 };
 
 // Data structures for RWA metadata
@@ -41,7 +40,6 @@ pub struct RealWorldAssetContract;
 
 #[contractimpl]
 impl RealWorldAssetContract {
-    
     /// Initialize the RWA contract
     pub fn initialize(
         env: Env,
@@ -56,16 +54,16 @@ impl RealWorldAssetContract {
 
         // Set admin
         env.storage().instance().set(&ADMIN, &admin);
-        
+
         // Set asset metadata
         env.storage().instance().set(&METADATA, &asset_metadata);
-        
+
         // Set initial supply
         env.storage().instance().set(&TOTAL_SUPPLY, &initial_supply);
-        
+
         // Set paused state to false
         env.storage().instance().set(&PAUSED, &false);
-        
+
         // Initialize balance tracking
         let mut balances: Map<Address, i128> = Map::new(&env);
         if initial_supply > 0 {
@@ -78,17 +76,22 @@ impl RealWorldAssetContract {
     pub fn mint_simple(env: Env, to: Address, amount: i128) {
         Self::require_admin(&env);
         Self::require_not_paused(&env);
-        
+
         // Update balance
-        let mut balances: Map<Address, i128> = 
-            env.storage().instance().get(&BALANCES).unwrap_or(Map::new(&env));
+        let mut balances: Map<Address, i128> = env
+            .storage()
+            .instance()
+            .get(&BALANCES)
+            .unwrap_or(Map::new(&env));
         let current_balance = balances.get(to.clone()).unwrap_or(0);
         balances.set(to, current_balance + amount);
         env.storage().instance().set(&BALANCES, &balances);
-        
+
         // Update total supply
         let current_supply: i128 = env.storage().instance().get(&TOTAL_SUPPLY).unwrap_or(0);
-        env.storage().instance().set(&TOTAL_SUPPLY, &(current_supply + amount));
+        env.storage()
+            .instance()
+            .set(&TOTAL_SUPPLY, &(current_supply + amount));
     }
 
     /// Mint new RWA tokens (admin only)
@@ -96,39 +99,49 @@ impl RealWorldAssetContract {
         Self::require_admin(&env);
         Self::require_not_paused(&env);
         Self::require_compliance(&env, &to);
-        
+
         // Update balance
-        let mut balances: Map<Address, i128> = 
-            env.storage().instance().get(&BALANCES).unwrap_or(Map::new(&env));
+        let mut balances: Map<Address, i128> = env
+            .storage()
+            .instance()
+            .get(&BALANCES)
+            .unwrap_or(Map::new(&env));
         let current_balance = balances.get(to.clone()).unwrap_or(0);
         balances.set(to, current_balance + amount);
         env.storage().instance().set(&BALANCES, &balances);
-        
+
         // Update total supply
         let current_supply: i128 = env.storage().instance().get(&TOTAL_SUPPLY).unwrap_or(0);
-        env.storage().instance().set(&TOTAL_SUPPLY, &(current_supply + amount));
+        env.storage()
+            .instance()
+            .set(&TOTAL_SUPPLY, &(current_supply + amount));
     }
 
     /// Burn RWA tokens (admin only)
     pub fn burn(env: Env, from: Address, amount: i128) {
         Self::require_admin(&env);
         Self::require_not_paused(&env);
-        
+
         // Check balance
-        let mut balances: Map<Address, i128> = 
-            env.storage().instance().get(&BALANCES).unwrap_or(Map::new(&env));
+        let mut balances: Map<Address, i128> = env
+            .storage()
+            .instance()
+            .get(&BALANCES)
+            .unwrap_or(Map::new(&env));
         let current_balance = balances.get(from.clone()).unwrap_or(0);
-        
+
         if current_balance < amount {
             panic!("Insufficient balance to burn");
         }
-        
+
         balances.set(from, current_balance - amount);
         env.storage().instance().set(&BALANCES, &balances);
-        
+
         // Update total supply
         let current_supply: i128 = env.storage().instance().get(&TOTAL_SUPPLY).unwrap_or(0);
-        env.storage().instance().set(&TOTAL_SUPPLY, &(current_supply - amount));
+        env.storage()
+            .instance()
+            .set(&TOTAL_SUPPLY, &(current_supply - amount));
     }
 
     /// Transfer tokens with compliance check
@@ -136,18 +149,21 @@ impl RealWorldAssetContract {
         Self::require_not_paused(&env);
         Self::require_compliance(&env, &to);
         Self::require_whitelist(&env, &to);
-        
+
         from.require_auth();
-        
+
         // Check balance
-        let mut balances: Map<Address, i128> = 
-            env.storage().instance().get(&BALANCES).unwrap_or(Map::new(&env));
+        let mut balances: Map<Address, i128> = env
+            .storage()
+            .instance()
+            .get(&BALANCES)
+            .unwrap_or(Map::new(&env));
         let from_balance = balances.get(from.clone()).unwrap_or(0);
-        
+
         if from_balance < amount {
             panic!("Insufficient balance");
         }
-        
+
         // Update balances
         let to_balance = balances.get(to.clone()).unwrap_or(0);
         balances.set(from, from_balance - amount);
@@ -157,18 +173,24 @@ impl RealWorldAssetContract {
 
     /// Get balance of an address
     pub fn balance(env: Env, address: Address) -> i128 {
-        let balances: Map<Address, i128> = 
-            env.storage().instance().get(&BALANCES).unwrap_or(Map::new(&env));
+        let balances: Map<Address, i128> = env
+            .storage()
+            .instance()
+            .get(&BALANCES)
+            .unwrap_or(Map::new(&env));
         balances.get(address).unwrap_or(0)
     }
 
     /// Add address to compliance registry
     pub fn add_compliance(env: Env, address: Address, compliance_data: ComplianceData) {
         Self::require_admin(&env);
-        
-        let mut compliance_map: Map<Address, ComplianceData> = 
-            env.storage().instance().get(&COMPLIANCE).unwrap_or(Map::new(&env));
-        
+
+        let mut compliance_map: Map<Address, ComplianceData> = env
+            .storage()
+            .instance()
+            .get(&COMPLIANCE)
+            .unwrap_or(Map::new(&env));
+
         compliance_map.set(address, compliance_data);
         env.storage().instance().set(&COMPLIANCE, &compliance_map);
     }
@@ -176,10 +198,13 @@ impl RealWorldAssetContract {
     /// Add address to whitelist
     pub fn add_to_whitelist(env: Env, address: Address) {
         Self::require_admin(&env);
-        
-        let mut whitelist: Vec<Address> = 
-            env.storage().instance().get(&WHITELIST).unwrap_or(Vec::new(&env));
-        
+
+        let mut whitelist: Vec<Address> = env
+            .storage()
+            .instance()
+            .get(&WHITELIST)
+            .unwrap_or(Vec::new(&env));
+
         whitelist.push_back(address);
         env.storage().instance().set(&WHITELIST, &whitelist);
     }
@@ -187,10 +212,13 @@ impl RealWorldAssetContract {
     /// Remove address from whitelist
     pub fn remove_from_whitelist(env: Env, address: Address) {
         Self::require_admin(&env);
-        
-        let mut whitelist: Vec<Address> = 
-            env.storage().instance().get(&WHITELIST).unwrap_or(Vec::new(&env));
-        
+
+        let mut whitelist: Vec<Address> = env
+            .storage()
+            .instance()
+            .get(&WHITELIST)
+            .unwrap_or(Vec::new(&env));
+
         // Find and remove address
         for i in 0..whitelist.len() {
             if whitelist.get(i).unwrap() == address {
@@ -198,7 +226,7 @@ impl RealWorldAssetContract {
                 break;
             }
         }
-        
+
         env.storage().instance().set(&WHITELIST, &whitelist);
     }
 
@@ -211,11 +239,11 @@ impl RealWorldAssetContract {
     /// Update asset valuation (admin only)
     pub fn update_valuation(env: Env, new_valuation: i128, timestamp: u64) {
         Self::require_admin(&env);
-        
+
         let mut metadata: AssetMetadata = env.storage().instance().get(&METADATA).unwrap();
         metadata.valuation = new_valuation;
         metadata.last_valuation_date = timestamp;
-        
+
         env.storage().instance().set(&METADATA, &metadata);
     }
 
@@ -249,15 +277,21 @@ impl RealWorldAssetContract {
     }
 
     pub fn get_compliance(env: Env, address: Address) -> Option<ComplianceData> {
-        let compliance_map: Map<Address, ComplianceData> = 
-            env.storage().instance().get(&COMPLIANCE).unwrap_or(Map::new(&env));
+        let compliance_map: Map<Address, ComplianceData> = env
+            .storage()
+            .instance()
+            .get(&COMPLIANCE)
+            .unwrap_or(Map::new(&env));
         compliance_map.get(address)
     }
 
     pub fn is_whitelisted(env: Env, address: Address) -> bool {
-        let whitelist: Vec<Address> = 
-            env.storage().instance().get(&WHITELIST).unwrap_or(Vec::new(&env));
-        
+        let whitelist: Vec<Address> = env
+            .storage()
+            .instance()
+            .get(&WHITELIST)
+            .unwrap_or(Vec::new(&env));
+
         for i in 0..whitelist.len() {
             if whitelist.get(i).unwrap() == address {
                 return true;
@@ -280,14 +314,17 @@ impl RealWorldAssetContract {
     }
 
     fn require_compliance(env: &Env, address: &Address) {
-        let compliance_map: Map<Address, ComplianceData> = 
-            env.storage().instance().get(&COMPLIANCE).unwrap_or(Map::new(env));
-        
+        let compliance_map: Map<Address, ComplianceData> = env
+            .storage()
+            .instance()
+            .get(&COMPLIANCE)
+            .unwrap_or(Map::new(env));
+
         if let Some(compliance) = compliance_map.get(address.clone()) {
             if !compliance.kyc_verified {
                 panic!("KYC verification required");
             }
-            
+
             // Check if compliance has expired - be more careful with timestamp comparison
             let current_time = env.ledger().timestamp();
             if current_time > compliance.compliance_expiry {
@@ -299,9 +336,12 @@ impl RealWorldAssetContract {
     }
 
     fn require_whitelist(env: &Env, address: &Address) {
-        let whitelist: Vec<Address> = 
-            env.storage().instance().get(&WHITELIST).unwrap_or(Vec::new(env));
-        
+        let whitelist: Vec<Address> = env
+            .storage()
+            .instance()
+            .get(&WHITELIST)
+            .unwrap_or(Vec::new(env));
+
         let mut is_whitelisted = false;
         for i in 0..whitelist.len() {
             if whitelist.get(i).unwrap() == *address {
@@ -309,7 +349,7 @@ impl RealWorldAssetContract {
                 break;
             }
         }
-        
+
         if !is_whitelisted {
             panic!("Address not whitelisted");
         }
@@ -325,23 +365,31 @@ impl RealWorldAssetContract {
         Self::require_admin(&env);
         Self::require_not_paused(&env);
         // Skip compliance check for now
-        
+
         // Update balance
-        let mut balances: Map<Address, i128> = 
-            env.storage().instance().get(&BALANCES).unwrap_or(Map::new(&env));
+        let mut balances: Map<Address, i128> = env
+            .storage()
+            .instance()
+            .get(&BALANCES)
+            .unwrap_or(Map::new(&env));
         let current_balance = balances.get(to.clone()).unwrap_or(0);
         balances.set(to, current_balance + amount);
         env.storage().instance().set(&BALANCES, &balances);
-        
+
         // Update total supply
         let current_supply: i128 = env.storage().instance().get(&TOTAL_SUPPLY).unwrap_or(0);
-        env.storage().instance().set(&TOTAL_SUPPLY, &(current_supply + amount));
+        env.storage()
+            .instance()
+            .set(&TOTAL_SUPPLY, &(current_supply + amount));
     }
 
     fn require_compliance_simple(env: &Env, address: &Address) {
-        let compliance_map: Map<Address, ComplianceData> = 
-            env.storage().instance().get(&COMPLIANCE).unwrap_or(Map::new(env));
-        
+        let compliance_map: Map<Address, ComplianceData> = env
+            .storage()
+            .instance()
+            .get(&COMPLIANCE)
+            .unwrap_or(Map::new(env));
+
         if let Some(compliance) = compliance_map.get(address.clone()) {
             if !compliance.kyc_verified {
                 panic!("KYC verification required");
@@ -357,16 +405,21 @@ impl RealWorldAssetContract {
         Self::require_admin(&env);
         Self::require_not_paused(&env);
         Self::require_compliance_simple(&env, &to);
-        
+
         // Update balance
-        let mut balances: Map<Address, i128> = 
-            env.storage().instance().get(&BALANCES).unwrap_or(Map::new(&env));
+        let mut balances: Map<Address, i128> = env
+            .storage()
+            .instance()
+            .get(&BALANCES)
+            .unwrap_or(Map::new(&env));
         let current_balance = balances.get(to.clone()).unwrap_or(0);
         balances.set(to, current_balance + amount);
         env.storage().instance().set(&BALANCES, &balances);
-        
+
         // Update total supply
         let current_supply: i128 = env.storage().instance().get(&TOTAL_SUPPLY).unwrap_or(0);
-        env.storage().instance().set(&TOTAL_SUPPLY, &(current_supply + amount));
+        env.storage()
+            .instance()
+            .set(&TOTAL_SUPPLY, &(current_supply + amount));
     }
 }
