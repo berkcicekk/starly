@@ -1,5 +1,5 @@
 # 🌟 Starly – Stellar Reward & Staking Platform
-CANVA LİNK : [ https://www.canva.com/design/DAGq_RBWKMY/O3G2rrLQQaGS1F6gEh9uMQ/edit?utm_content=DAGq_RBWKMY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton ] 
+CANVA LINK : [ https://www.canva.com/design/DAGq_RBWKMY/O3G2rrLQQaGS1F6gEh9uMQ/edit?utm_content=DAGq_RBWKMY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton ] 
 
 ![231c6ea689a2e4e5d9af161aab40a3a2](https://github.com/user-attachments/assets/738df759-143d-43e4-bedb-56c4d0ab824f)
 
@@ -43,15 +43,23 @@ Starly’s goal is to make Web3 user engagement real, simple, and scalable. By c
 - Unit tests for contract logic.
 - Full user flow integration tests.
 
-### 6. Deployment
+### Deployment
 - Contract on Stellar **Testnet**.
 - ***Smart Contract Link***
 
 ---
 
-## 📦 Installation Guide
+## Project Demo Video
+***VIDEO LINK***
 
-git clone https://github.com/berkcicekk/starlyforstellar.git
-cd starly
-cd rwa-frontend
-npm install
+---
+
+## 📦 Installation Guide
+>git clone https://github.com/berkcicekk/starly/tree/main
+
+>cd rwa-frontend
+
+>npm install
+
+>npm run dev
+
