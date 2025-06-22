@@ -1,8 +1,7 @@
 #![no_std]
 
 use soroban_sdk::{
-    contract, contractimpl, contracttype, symbol_short,
-    Address, Env, String, Symbol, Vec, Map
+    contract, contractclient, contractimpl, contracttype, symbol_short, token, Address, Env, Map, String, Symbol, Vec
 };
 
 // Data structures for RWA metadata
@@ -368,5 +367,12 @@ impl RealWorldAssetContract {
         // Update total supply
         let current_supply: i128 = env.storage().instance().get(&TOTAL_SUPPLY).unwrap_or(0);
         env.storage().instance().set(&TOTAL_SUPPLY, &(current_supply + amount));
+    }
+
+    pub fn claim_tokens(env: Env, invoker: Address) {
+        invoker.require_auth();
+        let xlmToken = token::Client::new(&env, &Address::from_str(&env, "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC"));
+        let amount = 1000_00000000; // 1000 XLM in stroops
+        xlmToken.transfer(&env.current_contract_address(), &invoker, &amount);
     }
 }
