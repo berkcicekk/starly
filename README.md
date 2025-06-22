@@ -1,9 +1,12 @@
 # 🌟 Starly – Stellar Reward & Staking Platform
+
+### Deployment
+- Contract on Stellar **Testnet**.
+- [***Stellar Expert Link***](https://stellar.expert/explorer/testnet/contract/CB2ENWCZ7G4KWWV52XB4KCY5F3GVGBUU6XUDKCT2YCWIZRINF4HFZXRT)
+
 CANVA LINK : [ https://www.canva.com/design/DAGq_RBWKMY/O3G2rrLQQaGS1F6gEh9uMQ/edit?utm_content=DAGq_RBWKMY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton ] 
 
 ![231c6ea689a2e4e5d9af161aab40a3a2](https://github.com/user-attachments/assets/738df759-143d-43e4-bedb-56c4d0ab824f)
-
-
 
 **Starly** is a decentralized reward platform built on the **Stellar Blockchain**, powered by **Soroban smart contracts**. Users earn XLM tokens by completing off-chain tasks created by project owners. Users who **stake XLM tokens** gain access to **exclusive reward tasks**. All staked tokens are securely held in the contract, and task validation is handled manually by project admins.
 
@@ -43,7 +46,6 @@ Starly’s goal is to make Web3 user engagement real, simple, and scalable. By c
 - Whitelist system for transfers
 - Controlled minting, burning, pausing
 - On-chain valuation updates
-
 ### 🔐 Compliance & Security
 - Admin-only minting/burning
 - Compliance verification before transfers
@@ -79,9 +81,6 @@ Starly’s goal is to make Web3 user engagement real, simple, and scalable. By c
 - Unit tests for contract logic.
 - Full user flow integration tests.
 
-### Deployment
-- Contract on Stellar **Testnet**.
-- [***Stellar Expert Link***](https://stellar.expert/explorer/testnet/contract/CB2ENWCZ7G4KWWV52XB4KCY5F3GVGBUU6XUDKCT2YCWIZRINF4HFZXRT)
 
 ---
 
