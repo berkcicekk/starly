@@ -1,9 +1,7 @@
 # 🌟 Starly – Stellar Reward & Staking Platform
 CANVA LİNK : [ https://www.canva.com/design/DAGq_RBWKMY/O3G2rrLQQaGS1F6gEh9uMQ/edit?utm_content=DAGq_RBWKMY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton ] 
 
-![starly_logo](https://github.com/user-attachments/assets/8738f6ca-5a01-4bf3-82f3-98fbcee4f472)
-
-
+![231c6ea689a2e4e5d9af161aab40a3a2](https://github.com/user-attachments/assets/738df759-143d-43e4-bedb-56c4d0ab824f)
 
 
 
