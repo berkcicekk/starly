@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RWA Investor - Real World Asset Platform",
-  description: "Access tokenized real estate, commodities, and other physical assets through compliant blockchain technology on Stellar.",
+  title: "Starly - Earn Tokens By Completing Tasks",
+  description: "A decentralized reward platform built on the Stellar blockchain where users earn tokens through task completion and staking, powered by Soroban smart contracts.",
 };
 
 export default function RootLayout({

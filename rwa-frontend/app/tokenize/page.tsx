@@ -33,7 +33,7 @@ import { Progress } from '@/components/ui/progress';
 const ASSET_TYPES = [
   {
     id: 'real_estate',
-    name: 'Real Estate',
+    name: 'X Platform Task',
     description: 'Residential, commercial, or industrial properties',
     icon: Building2,
     minValue: 100000,
@@ -41,16 +41,16 @@ const ASSET_TYPES = [
   },
   {
     id: 'commodities',
-    name: 'Commodities',
-    description: 'Physical goods and precious metals',
+    name: 'Content Task',
+    description: 'Medium...',
     icon: Coins,
     minValue: 50000,
     examples: ['Gold storage', 'Oil reserves', 'Agricultural products', 'Rare metals']
   },
   {
     id: 'infrastructure',
-    name: 'Infrastructure',
-    description: 'Energy, transportation, and utility projects',
+    name: 'Follow Task',
+    description: 'Follow projects social media accounts',
     icon: Briefcase,
     minValue: 500000,
     examples: ['Solar farms', 'Wind turbines', 'Data centers', 'Transportation hubs']
@@ -60,8 +60,8 @@ const ASSET_TYPES = [
 const TOKENIZATION_STEPS = [
   {
     id: 1,
-    title: 'Asset Details',
-    description: 'Provide basic information about your asset'
+    title: 'Task Details',
+    description: 'Provide basic information about your task'
   },
   {
     id: 2,
@@ -154,7 +154,7 @@ export default function TokenizePage() {
         return (
           <div className="space-y-6">
             <div>
-              <Label className="text-base font-semibold mb-4 block">Asset Type</Label>
+              <Label className="text-base font-semibold mb-4 block">Task Type</Label>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {ASSET_TYPES.map((type) => {
                   const Icon = type.icon;
@@ -182,19 +182,19 @@ export default function TokenizePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <Label htmlFor="assetName">Asset Name</Label>
+                <Label htmlFor="assetName">Project Name</Label>
                 <Input
                   id="assetName"
-                  placeholder="e.g., Luxury Apartment NYC"
+                  placeholder="Starly project etc."
                   value={formData.assetName}
                   onChange={(e) => updateFormData('assetName', e.target.value)}
                 />
               </div>
               <div>
-                <Label htmlFor="location">Location</Label>
+                <Label htmlFor="location">Network</Label>
                 <Input
                   id="location"
-                  placeholder="e.g., Manhattan, New York"
+                  placeholder="Stellar, Ethereum, etc."
                   value={formData.location}
                   onChange={(e) => updateFormData('location', e.target.value)}
                 />
@@ -202,7 +202,7 @@ export default function TokenizePage() {
             </div>
 
             <div>
-              <Label htmlFor="description">Asset Description</Label>
+              <Label htmlFor="description">Task Description</Label>
               <Textarea
                 id="description"
                 placeholder="Detailed description of your asset, its features, and investment potential..."
@@ -583,9 +583,9 @@ export default function TokenizePage() {
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Header */}
           <div className="text-center space-y-4">
-            <h1 className="text-4xl font-bold">Asset Tokenization</h1>
+            <h1 className="text-4xl font-bold">Add Task</h1>
             <p className="text-xl text-muted-foreground">
-              Transform your real world asset into tradeable tokens
+              Create on-chain tasks and engage your community.
             </p>
           </div>
 

@@ -29,10 +29,10 @@ import Link from 'next/link';
 const marketplaceAssets = [
   {
     id: '1',
-    name: 'Luxury Apartment NYC',
-    location: 'Manhattan, New York',
+    name: 'MoneyGram',
+    location: 'Stellar Network',
     type: 'real_estate',
-    description: 'Premium apartment in Manhattan with high rental yield',
+    description: 'With thousands of retail locations worldwide, MoneyGram lets you convert your cash into USDC, and back again.',
     totalValue: '2500000',
     availableTokens: '1000000',
     pricePerToken: '2.50',
@@ -46,8 +46,8 @@ const marketplaceAssets = [
   },
   {
     id: '2',
-    name: 'Downtown Office Building',
-    location: 'Chicago, Illinois',
+    name: 'Franklin Templeton',
+    location: 'Stellar Network',
     type: 'real_estate',
     description: 'Class A commercial office space in downtown Chicago',
     totalValue: '5000000',
@@ -63,10 +63,10 @@ const marketplaceAssets = [
   },
   {
     id: '3',
-    name: 'Gold Storage Facility',
+    name: 'Circle',
     location: 'Delaware, USA',
     type: 'commodities',
-    description: 'Secure precious metals storage and trading facility',
+    description: 'Make money movement your competitive edge.',
     totalValue: '3000000',
     availableTokens: '1500000',
     pricePerToken: '2.00',
@@ -159,9 +159,9 @@ export default function MarketplacePage() {
         <div className="space-y-8">
           {/* Page Header */}
           <div className="space-y-4">
-            <h1 className="text-4xl font-bold">Asset Marketplace</h1>
+            <h1 className="text-4xl font-bold">Task List</h1>
             <p className="text-xl text-muted-foreground">
-              Discover tokenized real world assets and start investing today
+            Discover on-chain tasks, stake tokens, and start earning rewards on Stellar today.
             </p>
           </div>
 
@@ -169,7 +169,7 @@ export default function MarketplacePage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Assets</CardTitle>
+                <CardTitle className="text-sm font-medium">Total Task</CardTitle>
                 <Building2 className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
@@ -206,7 +206,7 @@ export default function MarketplacePage() {
 
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Active Investors</CardTitle>
+                <CardTitle className="text-sm font-medium">Active Projects</CardTitle>
                 <Users className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
@@ -223,7 +223,7 @@ export default function MarketplacePage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Filter className="h-5 w-5" />
-                Filter Assets
+                Filter Project
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -232,7 +232,7 @@ export default function MarketplacePage() {
                   <div className="relative">
                     <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
                     <Input
-                      placeholder="Search assets by name or location..."
+                      placeholder="Search project by name or location..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       className="pl-8"
@@ -299,7 +299,7 @@ export default function MarketplacePage() {
                       <p className="font-semibold">{formatCurrency(asset.totalValue)}</p>
                     </div>
                     <div>
-                      <p className="text-muted-foreground">Min. Investment</p>
+                      <p className="text-muted-foreground">Min. Prize</p>
                       <p className="font-semibold">{formatCurrency((parseFloat(asset.pricePerToken) * 100).toString())}</p>
                     </div>
                     <div>
@@ -338,7 +338,7 @@ export default function MarketplacePage() {
                     ) : (
                       <Button className="flex-1" variant="outline" disabled>
                         <Clock className="h-4 w-4 mr-2" />
-                        {asset.status === 'upcoming' ? `Launches ${formatDate(asset.launchDate)}` : 'Sold Out'}
+                        {asset.status === 'upcoming' ? `Task Time: ${formatDate(asset.launchDate)}` : 'Sold Out'}
                       </Button>
                     )}
                     <Button variant="outline" size="icon">

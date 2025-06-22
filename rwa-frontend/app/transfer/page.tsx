@@ -22,13 +22,13 @@ import { formatTokenAmount, isValidStellarAddress, toContractAmount, estimateNet
 import { toast } from 'sonner';
 import Link from 'next/link';
 
-export default function TransferPage() {
+export default function ClaimPage() {
   const { isConnected, address, connect } = useWalletStore();
   const { 
     userBalance, 
     isWhitelisted, 
     compliance,
-    transfer,
+    Claim,
     isLoading,
     fetchUserData,
     fetchContractData
@@ -48,14 +48,14 @@ export default function TransferPage() {
     }
   }, [isConnected, address, fetchContractData, fetchUserData]);
 
-  // Validate recipient address
+  
   useEffect(() => {
     if (recipient) {
       const valid = isValidStellarAddress(recipient);
       setIsValidRecipient(valid);
       
       if (valid) {
-        // In a real app, this would check recipient compliance
+      
         setRecipientCompliance({
           isWhitelisted: true,
           kyc_verified: true,
@@ -74,7 +74,7 @@ export default function TransferPage() {
     setAmount(formatTokenAmount(userBalance));
   };
 
-  const canTransfer = () => {
+  const canClaim = () => {
     if (!isConnected || !address) return false;
     if (!isWhitelisted) return false;
     if (!isValidRecipient) return false;
@@ -83,30 +83,31 @@ export default function TransferPage() {
     return true;
   };
 
-  const handleTransfer = async () => {
-    if (!canTransfer() || !address) return;
+  const handleClaim = async () => {
+    if (!canClaim() || !address) return;
 
     try {
       const contractAmount = toContractAmount(amount);
-      const success = await transfer(address, recipient, contractAmount);
+      const success = await Claim(address, recipient, contractAmount);
       
       if (success) {
-        toast.success('Transfer completed successfully!');
+        toast.success('Claim completed successfully!');
         setAmount('');
         setRecipient('');
         setShowConfirmation(false);
       } else {
-        toast.error('Transfer failed. Please try again.');
+        toast.error('Claim failed. Please try again.');
       }
     } catch (error) {
-      console.error('Transfer error:', error);
-      toast.error('Transfer failed. Please check the details and try again.');
+      console.error('Claim error:', error);
+      toast.error('Claim failed. Please check the details and try again.');
     }
   };
 
   if (!isConnected) {
     return (
-      <div className="min-h-screen bg-background">
+     <div className="min-h-screen bg-black text-white">
+
         <Header />
         <main className="container mx-auto px-4 py-8">
           <div className="flex flex-col items-center justify-center min-h-[calc(100vh-120px)] space-y-6">
@@ -115,7 +116,7 @@ export default function TransferPage() {
                 <Wallet className="h-16 w-16 mx-auto text-muted-foreground" />
                 <CardTitle>Connect Your Wallet</CardTitle>
                 <CardDescription>
-                  You need to connect your Freighter wallet to transfer RWA tokens
+                  You need to connect your Freighter wallet to Claim RWA tokens
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -137,7 +138,7 @@ export default function TransferPage() {
         <div className="max-w-2xl mx-auto space-y-6">
           {/* Page Header */}
           <div className="space-y-2">
-            <h1 className="text-3xl font-bold">Transfer RWA Tokens</h1>
+            <h1 className="text-3xl font-bold">Claim RWA Tokens</h1>
             <p className="text-muted-foreground">
               Send your tokenized real world asset shares to other verified investors
             </p>
@@ -163,32 +164,38 @@ export default function TransferPage() {
             </AlertDescription>
           </Alert>
 
-          {/* Current Holdings */}
-          <Card>
+            {/* Current Holdings */}
+            <Card
+            style={{
+              borderWidth: 4,
+              borderRadius: 8,
+              borderStyle: 'solid',
+              borderImage: 'linear-gradient(90deg, #3b82f6, #a21caf, #ec4899) 1',
+            }}
+            >
             <CardHeader>
-              <CardTitle>Your Holdings</CardTitle>
-              <CardDescription>Available RWA tokens for transfer</CardDescription>
+              <CardTitle>Your Earns</CardTitle>
+              <CardDescription>Available tokens for Claim</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-2xl font-bold">{formatTokenAmount(userBalance)} LAPT</p>
-                  <p className="text-sm text-muted-foreground">Luxury Apartment NYC tokens</p>
-                </div>
-                <Badge variant="secondary">Real Estate</Badge>
+              <div>
+                <p className="text-2xl font-bold">{formatTokenAmount(userBalance)} XLM</p>
+                <p className="text-sm text-muted-foreground">MoneyGram tokens</p>
+              </div>
+              <Badge variant="secondary">X thread task</Badge>
               </div>
             </CardContent>
-          </Card>
-
-          {/* Transfer Form */}
-          <Card>
+            </Card>
+            {/* Claim Form */}
+            <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Send className="h-5 w-5" />
-                Transfer Tokens
+                Claim Tokens
               </CardTitle>
               <CardDescription>
-                Enter the recipient address and amount to transfer
+                Enter the recipient address and amount to Claim
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -218,7 +225,7 @@ export default function TransferPage() {
               {/* Amount */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="amount">Amount (LAPT)</Label>
+                  <Label htmlFor="amount">Amount (XLM)</Label>
                   <Button 
                     variant="ghost" 
                     size="sm" 
@@ -249,11 +256,11 @@ export default function TransferPage() {
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span>Amount:</span>
-                      <span className="font-mono">{amount} LAPT</span>
+                      <span className="font-mono">{amount} XLM</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Estimated Network Fee:</span>
-                      <span className="font-mono">{estimateNetworkFee('transfer')} XLM</span>
+                      <span className="font-mono">{estimateNetworkFee('Claim')} XLM</span>
                     </div>
                     <div className="flex justify-between">
                       <span>To:</span>
@@ -265,18 +272,18 @@ export default function TransferPage() {
                 </div>
               )}
 
-              {/* Transfer Button */}
+              {/* Claim Button */}
               <Button 
-                onClick={handleTransfer}
-                disabled={!canTransfer() || isLoading}
+                onClick={handleClaim}
+                disabled={!canClaim() || isLoading}
                 className="w-full"
                 size="lg"
               >
                 {isLoading ? (
-                  'Processing Transfer...'
+                  'Processing Claim...'
                 ) : (
                   <>
-                    Transfer Tokens
+                    Claim Tokens
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </>
                 )}
@@ -287,7 +294,7 @@ export default function TransferPage() {
                 <Alert variant="destructive">
                   <AlertCircle className="h-4 w-4" />
                   <AlertDescription>
-                    Your address is not whitelisted. You cannot transfer tokens until compliance verification is complete.
+                    Your address is not whitelisted. You cannot Claim tokens until compliance verification is complete.
                   </AlertDescription>
                 </Alert>
               )}
@@ -297,7 +304,7 @@ export default function TransferPage() {
           {/* Help Section */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Transfer Requirements</CardTitle>
+              <CardTitle className="text-lg">Claim Requirements</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex items-start gap-3">
@@ -323,7 +330,7 @@ export default function TransferPage() {
                 <div>
                   <p className="font-medium">Jurisdiction Compliance</p>
                   <p className="text-sm text-muted-foreground">
-                    Transfers must comply with local regulations and asset restrictions
+                    Claims must comply with local regulations and asset restrictions
                   </p>
                 </div>
               </div>

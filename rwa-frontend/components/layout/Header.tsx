@@ -95,13 +95,17 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between px-4">
         {/* Logo and Navigation */}
         <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-3">
-            <Building2 className="h-8 w-8 text-primary" />
-            <div>
-              <h1 className="text-lg font-bold">RWA Investor</h1>
-              <p className="text-xs text-muted-foreground">Real World Assets</p>
-            </div>
-          </Link>
+            <Link href="/" className="flex items-center gap-3">
+              <img
+              src="/starly_logo.png"
+              alt="Starly Logo"
+              className="h-20 w-20"
+              />
+              <div>
+              <h1 className="text-lg font-bold">Starly</h1>
+              <p className="text-xs text-muted-foreground">Earn tokens by completing tasks</p>
+              </div>
+            </Link>
 
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center gap-6">
@@ -115,19 +119,19 @@ export function Header() {
               href="/marketplace" 
               className="text-sm font-medium transition-colors hover:text-primary"
             >
-              Marketplace
+              Tasks List
             </Link>
             <Link 
               href="/tokenize" 
               className="text-sm font-medium transition-colors hover:text-primary"
             >
-              Tokenize
+              Claim Token
             </Link>
             <Link 
               href="/transfer" 
               className="text-sm font-medium transition-colors hover:text-primary"
             >
-              Transfer
+              Stake Token
             </Link>
           </nav>
         </div>
